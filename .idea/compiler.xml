@@ -6,12 +6,26 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="cyber-chair" />
+        <module name="cc-author-service" />
+        <module name="cc-user-auth-service" />
+        <module name="cc-pcmember-service" />
+        <module name="cc-author-article-service" />
+        <module name="cc-admin-meeting-service" />
+        <module name="cc-chair-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cc-author-service" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cc-admin-meeting-service" options="-parameters" />
+      <module name="cc-author-article-service" options="-parameters" />
+      <module name="cc-author-service" options="-parameters" />
+      <module name="cc-chair-service" options="-parameters" />
+      <module name="cc-pcmember-service" options="-parameters" />
+      <module name="cc-user-auth-service" options="-parameters" />
       <module name="cyber-chair" options="-parameters" />
     </option>
   </component>
