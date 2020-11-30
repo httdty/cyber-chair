@@ -1,5 +1,6 @@
 package userauth;
 
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import userauth.domain.User;
 import userauth.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.client.RestTemplate;
 
+@EnableEurekaClient
 @SpringBootApplication
 public class UserAuthApplication {
     public static void main(String[] args) {

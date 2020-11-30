@@ -33,19 +33,20 @@ public class RestRPC {
 //    private String article_findNameAdSt="http://192.168.31.214:8080/article/findArticleByMeetingNameAndStatus";
 //    private String pcmember_findIdAdSt="http://192.168.31.214:8080/meeting/pcMemberRelation/getByPcmemberIdAndStatus";
 //    private String check_auth="http://http://192.168.31.112:8080/check";
-    private String user_findName="http://localhost:8080/user/username";
-    private String user_findId="http://localhost:8080/user/id";
-    private String user_findEmail="http://localhost:8080/user/email";
-    private String user_findFullAdEmail="http://localhost:8080/user/author";
-    private String meet_findName="http://localhost:8082/meeting/getByName";
-    private String meet_findId="http://localhost:8082/meeting/getById";
-    private String meet_save="http://localhost:8082/meeting/save";
-    private String article_findId="http://localhost:8081/article/findArticleById";
-    private String article_findIdNot="http://localhost:8081/article/findArticleByIdNot";
-    private String article_save="http://localhost:8081/article/save";
-    private String article_findNameAdSt="http://localhost:8081/article/findArticleByMeetingNameAndStatus";
-    private String pcmember_findIdAdSt="http://localhost:8082/meeting/pcMemberRelation/getByPcmemberIdAndStatus";
-    private String check_auth="http://localhost:8080/check";
+    private String user_findName="http://cc-user-auth-service/user/username";
+    private String user_findId="http://cc-user-auth-service/user/id";
+    private String user_findEmail="http://lcc-user-auth-service/user/email";
+    private String user_findFullAdEmail="http://cc-user-auth-service/user/author";
+    private String meet_findName="http://cc-admin-meeting-service/meeting/getByName";
+    private String meet_findId="http://cc-admin-meeting-service/meeting/getById";
+    private String meet_save="http://cc-admin-meeting-service/meeting/save";
+    private String article_findId="http://cc-author-article-service/article/findArticleById";
+    private String article_findIdNot="http://cc-author-article-service/article/findArticleByIdNot";
+    private String article_save="http://cc-author-article-service/article/save";
+    private String article_findNameAdSt="http://cc-author-article-service/article/findArticleByMeetingNameAndStatus";
+//    TODO: 下面的地址不知道对不对
+    private String pcmember_findIdAdSt="http://cc-admin-meeting-service/meeting/pcMemberRelation/getByPcmemberIdAndStatus";
+    private String check_auth="http://cc-user-auth-service/check";
     //=====================user=====================
     public User userFindByUsername(String userName){
         MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
