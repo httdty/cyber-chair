@@ -1,14 +1,10 @@
-package authorarticle.domain;
+package authorarticle.response;
 
-import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-public class Meeting {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class MeetingResponse {
+//    private Long id;
+//    先删除掉，需要再添加
 
     private String chairName;
     private String meetingName;
@@ -16,7 +12,6 @@ public class Meeting {
     private String region;
     private String city;
     private String venue;
-    @ElementCollection
     private Set<String> topic;
     private String organizer;
     private String webPage;
@@ -25,9 +20,10 @@ public class Meeting {
     private String conferenceDate;
     private String status;//许可
 
-    public Meeting(){}
+    public MeetingResponse() {
+    }
 
-    public Meeting(String chairName, String meetingName, String acronym, String region, String city, String venue, Set<String> topic, String organizer, String webPage, String submissionDeadlineDate, String notificationOfAcceptanceDate, String conferenceDate, String approval) {
+    public MeetingResponse(String chairName, String meetingName, String acronym, String region, String city, String venue, Set<String> topic, String organizer, String webPage, String submissionDeadlineDate, String notificationOfAcceptanceDate, String conferenceDate, String approval) {
         this.chairName = chairName;
         this.meetingName = meetingName;
         this.acronym = acronym;
@@ -43,29 +39,14 @@ public class Meeting {
         this.status = approval;
     }
 
-    public Meeting(Meeting meeting) {
-        this.chairName = meeting.getChairName();
-        this.meetingName = meeting.getMeetingName();
-        this.acronym = meeting.getAcronym();
-        this.region = meeting.getRegion();
-        this.city = meeting.getCity();
-        this.venue = meeting.getVenue();
-        this.topic = meeting.getTopic();
-        this.organizer = meeting.getOrganizer();
-        this.webPage = meeting.getWebPage();
-        this.submissionDeadlineDate = meeting.getSubmissionDeadlineDate();
-        this.notificationOfAcceptanceDate = meeting.getNotificationOfAcceptanceDate();
-        this.conferenceDate = meeting.getConferenceDate();
-        this.status = meeting.getStatus();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getChairName() {
         return chairName;

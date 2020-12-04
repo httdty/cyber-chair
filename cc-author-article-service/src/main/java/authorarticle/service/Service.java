@@ -1,7 +1,7 @@
 package authorarticle.service;
 
 import authorarticle.domain.Article;
-import authorarticle.request.user.ArticleRequest;
+import authorarticle.request.ArticleRequest;
 import authorarticle.service.author.AuthorService;
 import authorarticle.service.author.api.ArticleService;
 import authorarticle.utility.response.ResponseGenerator;

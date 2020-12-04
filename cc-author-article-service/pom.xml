@@ -11,6 +11,14 @@
 
     <artifactId>cc-author-article-service</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+    </dependencies>
+
+
     <!--    TODO: javafx-maven-plugin didn't exist, demo shows blow-->
     <!--    <build>-->
     <!--        <plugins>-->

@@ -16,11 +16,11 @@
     </properties>
 
     <modules>
-        <module>cc-user-auth-service</module>
+        <module>cc-userResponse-auth-service</module>
         <module>cc-pcmember-service</module>
         <module>cc-author-article-service</module>
         <module>cc-chair-service</module>
-        <module>cc-admin-meeting-service</module>
+        <module>cc-admin-meetingResponse-service</module>
         <module>cc-eureka-service</module>
         <module>cc-gateway-service</module>
     </modules>

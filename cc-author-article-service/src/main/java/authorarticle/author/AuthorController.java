@@ -2,7 +2,7 @@ package authorarticle.author;
 
 import authorarticle.config.RemoteServiceConfig;
 import authorarticle.domain.Author;
-import authorarticle.request.user.ArticleRequest;
+import authorarticle.request.ArticleRequest;
 import authorarticle.service.Service;
 import authorarticle.utility.response.ResponseWrapper;
 import com.alibaba.fastjson.JSONArray;

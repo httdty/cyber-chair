@@ -7,7 +7,10 @@ import authorarticle.exception.MeetingUnavaliableToOperateException;
 import authorarticle.exception.UserNamedidntExistException;
 import authorarticle.exception.user.ArticleNotFoundException;
 import authorarticle.repository.ArticleRepository;
-import authorarticle.request.user.ArticleRequest;
+import authorarticle.request.ArticleRequest;
+import authorarticle.response.MeetingResponse;
+import authorarticle.response.ReviewRelationResponse;
+import authorarticle.response.UserResponse;
 import authorarticle.utility.ApiUtil;
 import authorarticle.utility.contract.ArticleStatus;
 import authorarticle.utility.contract.MeetingStatus;
@@ -63,15 +66,15 @@ public class AuthorService {
         List<Article> articleList = articleRepository.findByContributorName(username);
         HashMap<String, Set<HashMap<String, Object>>> body = new HashMap<>();
         Set<HashMap<String, Object>> response = new HashSet<>();
-        Set<Long>meetingCount = new HashSet<>();
+        Set<String>meetingCount = new HashSet<>();
 //        TODO: There should be more efficient by change it into list, or finished by meeting
         for(Article article : articleList){
             // FINISHED: change to REST
-             Meeting meeting = this.findMeetingByMeetingName(article.getMeetingname());
+             MeetingResponse meetingResponse = this.findMeetingByMeetingName(article.getMeetingname());
 
-            if(!meetingCount.contains(meeting.getId())){
-                meetingCount.add(meeting.getId());
-                response.add(ResponseGenerator.generate(meeting,
+            if(!meetingCount.contains(meetingResponse.getMeetingName())){
+                meetingCount.add(meetingResponse.getMeetingName());
+                response.add(ResponseGenerator.generate(meetingResponse,
                         new String[]{"meetingName", "acronym", "submissionDeadlineDate", "topic"}, null));
             }
         }
@@ -124,7 +127,7 @@ public class AuthorService {
 
 //        FINISHED: need to be changed into rest
 
-        Meeting meeting = this.findMeetingByMeetingName(meetingName);
+        MeetingResponse meetingResponse = this.findMeetingByMeetingName(meetingName);
 //        Meeting fakemeeting = new Meeting();
 //        fakemeeting.setStatus(MeetingStatus.submissionAvaliable);
 //        fakemeeting.setAcronym("sdasd");
@@ -134,10 +137,10 @@ public class AuthorService {
 //        fakemeeting.setOrganizer("baidu");
 //        fakemeeting.setMeetingName("fake meeting");
 //        fakemeeting.setRegion("china");
-        User articleUploader = this.findUserByUsername(username);
+        UserResponse articleUploader = this.findUserByUsername(username);
 
         //guarantee that this operation is valid
-        authenticateArticle(meeting, articleUploader);
+        authenticateArticle(meetingResponse, articleUploader);
 
         MultipartFile pdfFile = request.getFile();
         //save the file, if exceptions happens, throw new InternalServerError
@@ -178,10 +181,10 @@ public class AuthorService {
         String username = request.getUsername();
 
 //        FINISHED: need to be changed into rest
-        Meeting meeting = this.findMeetingByMeetingName(meetingName);
-        User user = this.findUserByUsername(username);
+        MeetingResponse meetingResponse = this.findMeetingByMeetingName(meetingName);
+        UserResponse userResponse = this.findUserByUsername(username);
 
-        authenticateArticle(meeting, user);
+        authenticateArticle(meetingResponse, userResponse);
         if(request.getFile() != null) {
 
             //delete the previous pdf file
@@ -195,7 +198,7 @@ public class AuthorService {
                 throw new InternalServerError("UserArticleService.updateExistedArticle(): previous pdf doesn't exist");
             }
             String internalFilePath = targetRootDir +
-                    user.getUsername() + File.separator +
+                    userResponse.getUsername() + File.separator +
                     request.getSubmitDate() + File.separator;
 
             MultipartFile pdfFile = request.getFile();
@@ -232,11 +235,11 @@ public class AuthorService {
         if(article == null)
             throw new ArticleNotFoundException(articleId);
 //        FINISHED: should to be changed into rest
-        Set<ReviewRelation> allReviews = this.findReviewRelationsByArticleId(articleId);
+        Set<ReviewRelationResponse> allReviews = this.findReviewRelationsByArticleId(articleId);
 
         HashMap<String, Set<HashMap<String, Object>>> respBody = new HashMap<>();
         Set<HashMap<String, Object>> reviews = new HashSet<>();
-        for(ReviewRelation relation: allReviews){
+        for(ReviewRelationResponse relation: allReviews){
             HashMap<String, Object> items = new HashMap<>();
             items.put("score", relation.getScore());
             items.put("confidence", relation.getConfidence());
@@ -276,13 +279,13 @@ public class AuthorService {
     }
 
     //this function is used to guarantee a article can be upload or update
-    private void authenticateArticle(Meeting meeting, User user) {
-        if (meeting == null)
+    private void authenticateArticle(MeetingResponse meetingResponse, UserResponse userResponse) {
+        if (meetingResponse == null)
             throw new MeetingUnavaliableToOperateException("Not created");
-        if (user == null)
+        if (userResponse == null)
             throw new UserNamedidntExistException("not a valid user");
 
-        if (!meeting.getStatus().equals(MeetingStatus.submissionAvaliable))
+        if (!meetingResponse.getStatus().equals(MeetingStatus.submissionAvaliable))
             throw new MeetingUnavaliableToOperateException("update or upload articles");
     }
 
@@ -303,38 +306,38 @@ public class AuthorService {
 
     // sealed all data access into functions
     // make rest api just like local function
-    private Meeting findMeetingByMeetingName(String meetingName) {
+    private MeetingResponse findMeetingByMeetingName(String meetingName) {
         MultiValueMap<String, String> paramsMeeting = new LinkedMultiValueMap<>();
         paramsMeeting.add("meetingName", meetingName);
-        ResponseEntity<Meeting> res = restTemplate.exchange(
+        ResponseEntity<MeetingResponse> res = restTemplate.exchange(
                 apiUtil.encodeUriForGet(paramsMeeting, api.getFindMeetingByMeetingName()),
                 HttpMethod.GET,
                 null,
-                Meeting.class
+                MeetingResponse.class
         );
         return Objects.requireNonNull(res.getBody());
     }
 
-    private User findUserByUsername(String username) {
+    private UserResponse findUserByUsername(String username) {
         MultiValueMap<String, String> paramsUser = new LinkedMultiValueMap<>();
         paramsUser.add("username", username);
-        ResponseEntity<User> resUser = restTemplate.exchange(
+        ResponseEntity<UserResponse> resUser = restTemplate.exchange(
                 apiUtil.encodeUriForGet(paramsUser, api.getFindUserByUsername()),
                 HttpMethod.GET,
                 null,
-                User.class
+                UserResponse.class
         );
         return Objects.requireNonNull(resUser.getBody());
     }
 
-    private Set<ReviewRelation> findReviewRelationsByArticleId(String articleId) {
+    private Set<ReviewRelationResponse> findReviewRelationsByArticleId(String articleId) {
         MultiValueMap<String, String> paramsReview = new LinkedMultiValueMap<>();
         paramsReview.add("articleId", articleId);
-        ResponseEntity<Set<ReviewRelation>> resUser = restTemplate.exchange(
+        ResponseEntity<Set<ReviewRelationResponse>> resUser = restTemplate.exchange(
                 apiUtil.encodeUriForGet(paramsReview, api.getFindReviewRelationsByArticleId()),
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<Set<ReviewRelation>>(){}
+                new ParameterizedTypeReference<Set<ReviewRelationResponse>>(){}
         );
         return Objects.requireNonNull(resUser.getBody());
     }

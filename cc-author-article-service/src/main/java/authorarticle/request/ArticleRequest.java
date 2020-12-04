@@ -1,5 +1,4 @@
-package authorarticle.request.user;
-
+package authorarticle.request;
 import authorarticle.domain.Author;
 import javafx.util.Pair;
 import org.springframework.web.multipart.MultipartFile;

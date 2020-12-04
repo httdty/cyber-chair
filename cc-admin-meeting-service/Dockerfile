@@ -2,7 +2,7 @@ FROM java:8-jre
 
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
 
-ADD ./target/cc-admin-meeting-service-1.0.jar /app/
-CMD ["java", "-Xmx200m", "-jar", "/app/cc-admin-meeting-service-1.0.jar"]
+ADD ./target/cc-admin-meetingResponse-service-1.0.jar /app/
+CMD ["java", "-Xmx200m", "-jar", "/app/cc-admin-meetingResponse-service-1.0.jar"]
 
 EXPOSE 8081

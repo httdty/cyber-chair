@@ -1,16 +1,12 @@
-package authorarticle.domain;
+package authorarticle.response;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-public class ReviewRelation {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class ReviewRelationResponse {
+//    private Long id;
 
     private Long reviewerId;
     private Long meetingId;
@@ -21,7 +17,7 @@ public class ReviewRelation {
     private String confidence;
     private String reviews;
 
-    public ReviewRelation(Long reviewerId, Long meetingId, Long articleId, String reviewStatus, int score, String confidence, String reviews) {
+    public ReviewRelationResponse(Long reviewerId, Long meetingId, Long articleId, String reviewStatus, int score, String confidence, String reviews) {
         this.reviewerId = reviewerId;
         this.meetingId = meetingId;
         this.articleId = articleId;
@@ -31,25 +27,25 @@ public class ReviewRelation {
         this.reviews = reviews;
     }
 
-    public ReviewRelation(ReviewRelation reviewRelation) {
-        this.reviewerId = reviewRelation.getReviewerId();
-        this.meetingId = reviewRelation.getMeetingId();
-        this.articleId = reviewRelation.getArticleId();
-        this.reviewStatus = reviewRelation.getReviewStatus();
-        this.score = reviewRelation.getScore();
-        this.confidence = reviewRelation.getConfidence();
-        this.reviews = reviewRelation.getReviews();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public ReviewRelation(){}
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public ReviewRelation(ReviewRelation reviewRelation) {
+//        this.reviewerId = reviewRelation.getReviewerId();
+//        this.meetingId = reviewRelation.getMeetingId();
+//        this.articleId = reviewRelation.getArticleId();
+//        this.reviewStatus = reviewRelation.getReviewStatus();
+//        this.score = reviewRelation.getScore();
+//        this.confidence = reviewRelation.getConfidence();
+//        this.reviews = reviewRelation.getReviews();
+//    }
+//
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public ReviewRelation(){}
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public Long getReviewerId() {
         return reviewerId;

@@ -1,9 +1,12 @@
-package authorarticle.request.util;
+package authorarticle.response;
 
-/**
- * @author TianyiZhang
- */
-public class RegisterRequest {
+public class UserResponse {
+
+//    TODO： 这里的serialVersionUID有啥用呢
+    private static final long serialVersionUID = -6140085056226164016L;
+
+//    private Long id;
+
     private String username;
     private String fullname;
     private String password;
@@ -11,10 +14,10 @@ public class RegisterRequest {
     private String institution;
     private String region;
 
-    public RegisterRequest() {
+    public UserResponse() {
     }
 
-    public RegisterRequest(String username, String fullname, String password, String email, String institution, String region) {
+    public UserResponse(String username, String fullname, String password, String email, String institution, String region) {
         this.username = username;
         this.fullname = fullname;
         this.password = password;
@@ -23,14 +26,18 @@ public class RegisterRequest {
         this.region = region;
     }
 
-    public RegisterRequest(RegisterRequest registerRequest) {
-        this.username = registerRequest.getUsername();
-        this.fullname = registerRequest.getFullname();
-        this.password = registerRequest.getPassword();
-        this.email = registerRequest.getEmail();
-        this.institution = registerRequest.getInstitution();
-        this.region = registerRequest.getRegion();
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
+
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getUsername() {
         return username;
@@ -79,6 +86,4 @@ public class RegisterRequest {
     public void setRegion(String region) {
         this.region = region;
     }
-
 }
-
