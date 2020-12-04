@@ -22,6 +22,7 @@
         <module>cc-chair-service</module>
         <module>cc-admin-meeting-service</module>
         <module>cc-eureka-service</module>
+        <module>cc-gateway-service</module>
     </modules>
 
     <parent>

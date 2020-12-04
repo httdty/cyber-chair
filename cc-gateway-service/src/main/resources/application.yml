@@ -1,0 +1,20 @@
+server:
+  port: 9999
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: route-for-cc-user-auth-service # routes id 自己设置一个就好
+          uri: lb://cc-user-auth-service # lb://{eureka注册服务的名称}
+          predicates: # Path 配置对应的url，比如配置了/welcome, 那么请求localhost:9999/welcome -> cc-user-auth-service/welcome
+            - Path=/welcome,/register,/login,/user/userinfo,/util/users,/postmessage/**,/user/chairMeeting,/user/pcMemberMeeting,/user/authorMeeting,/user/availableMeeting,/user/undealedNotifications,/user/invitationRepo,/user/undealedNotificationsNum,/user/alreadyDealedNotifications,/user/id,/user/author,/user/username,/user/email
+  application:
+    name: cc-gateway-service
+
+eureka:
+  client:
+    registry-fetch-interval-seconds: 3
+    service-url:
+      defaultZone: http://127.0.0.1:9091/eureka/
+
