@@ -9,6 +9,22 @@ spring:
           uri: lb://cc-user-auth-service # lb://{eureka注册服务的名称}
           predicates: # Path 配置对应的url，比如配置了/welcome, 那么请求localhost:9999/welcome -> cc-user-auth-service/welcome
             - Path=/welcome,/register,/login,/user/userinfo,/util/users,/postmessage/**,/user/chairMeeting,/user/pcMemberMeeting,/user/authorMeeting,/user/availableMeeting,/user/undealedNotifications,/user/invitationRepo,/user/undealedNotificationsNum,/user/alreadyDealedNotifications,/user/id,/user/author,/user/username,/user/email
+        - id: route-for-cc-author-article-service
+          uri: lb://cc-author-article-service
+          predicates:
+            - Path=/article/findArticleById,/article/findArticleByIdNot,/article/findArticleByContributorName,/article/findArticleByMeetingName,/article/findArticleByMeetingNameAndStatus,/article/findArticleByContributorNameAndMeetingName,/article/save,/user/authorMeeting,/meeting/submissionList,/user/articleDetail,/user/articleSubmission,/user/updateArticle
+        - id: route-for-cc-admin-meeting-service
+          uri: lb://cc-admin-meeting-service
+          predicates: # Path 配置对应的url，比如配置了/welcome, 那么请求localhost:9999/welcome -> cc-user-auth-service/welcome
+            - Path=/admin/**,/meeting/application, /meeting/meetingInfo, /meeting/pcmInvitation, /meeting/invitationStatus, /meeting/submissionList, /meeting/getByName, /meeting/getById, /meeting/getByChairName, /meeting/getByStatusAndChairNameNot, /meeting/save, /meeting/pcMemberRelation/getByMeetingId, /meeting/pcMemberRelation/getByPcmemberIdAndStatus, /meeting/pcMemberRelation/getByPcmemberIdAndMeetingId, /meeting/pcMemberRelation/getByMeetingIdAndStatus, /meeting/pcMemberRelation/getByPcmemberIdAndStatusNot, /meeting/pcMemberRelation/save, /meeting/pcMemberRelation/save, /meeting/reviewPost, /meeting/postList, /meeting/beginSubmission, /meeting/reviewArticles, /meeting/reviewArticle, /meeting/reviewer, /meeting/alreadyReviewedInfo, /meeting/beginReview, /meeting/publish
+        - id: route-for-cc-chair-service
+          uri: lb://cc-chair-service
+          predicates:
+            - Path=/meeting/beginSubmission,/meeting/publish,/meeting/pcmInvitation
+        - id: route-for-cc-pcmember-service # routes id 自己设置一个就好
+          uri: lb://cc-pcmember-service # lb://{eureka注册服务的名称}
+          predicates: # Path 配置对应的url，比如配置了/welcome, 那么请求localhost:9999/welcome -> cc-pcmember-service/welcome
+            - Path=/meeting/reviewArticles,/meeting/reviewArticle,/meeting/reviewer,/user/reviews,/meeting/alreadyReviewedInfo,/meeting/beginReview,/meeting/updateReview,/meeting/reviewConfirm,/meeting/rebuttal,/meeting/rebuttalInfo
   application:
     name: cc-gateway-service
 

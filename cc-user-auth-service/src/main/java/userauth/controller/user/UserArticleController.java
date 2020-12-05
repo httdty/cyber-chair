@@ -3,12 +3,12 @@ package userauth.controller.user;
 import userauth.config.RemoteServiceConfig;
 import userauth.controller.util.UtilController;
 import userauth.domain.Author;
+import userauth.domain.Pair;
 import userauth.request.user.ArticleDetailRequest;
 import userauth.request.user.ArticleRequest;
 import userauth.service.Service;
 import userauth.service.user.UserArticleService;
 import com.alibaba.fastjson.JSONArray;
-import javafx.util.Pair;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
