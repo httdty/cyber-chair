@@ -3,9 +3,9 @@ package chair.domain;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
+//@Entity
 public class PCMemberRelation {
-    @Id
+//    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

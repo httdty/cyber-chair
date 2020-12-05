@@ -14,9 +14,14 @@ public class PcmemberApplication {
         SpringApplication.run(PcmemberApplication.class, args);
     }
 
-    @Bean //依赖注入=多个文件共享一个对象
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build(); //build之后直接Autowired，就不用new构造了
+//    @Bean //依赖注入=多个文件共享一个对象
+//    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+//        return builder.build(); //build之后直接Autowired，就不用new构造了
+//    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 
 }

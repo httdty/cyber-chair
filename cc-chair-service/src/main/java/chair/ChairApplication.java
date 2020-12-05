@@ -29,20 +29,6 @@ public class ChairApplication {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                // Create authorities if not exist.
-
-                // Create an admin if not exists.
-                if (userRepository.findByUsername("admin") == null) {
-                    User admin = new User(
-                            "admin",
-                            "ErangelManager",
-                            BCrypt.hashpw("Erangel", BCrypt.gensalt()),
-                            "libowen@fudan.edu.cn",
-                            "Fudan University",
-                            "ShangHai China"
-                    );
-                    userRepository.save(admin);
-                    }
 
             }
 

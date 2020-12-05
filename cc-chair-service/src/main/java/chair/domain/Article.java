@@ -6,7 +6,7 @@ import javafx.util.Pair;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
+//@Entity
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

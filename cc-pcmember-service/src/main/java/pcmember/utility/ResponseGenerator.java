@@ -1,7 +1,6 @@
 package pcmember.utility;
 
-import javafx.util.Pair;
-
+import pcmember.utility.Pair;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.HashSet;

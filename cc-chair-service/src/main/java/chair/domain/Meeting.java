@@ -3,10 +3,10 @@ package chair.domain;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
+//@Entity
 public class Meeting {
 
-    @Id
+//    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

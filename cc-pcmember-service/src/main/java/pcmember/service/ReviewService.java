@@ -6,7 +6,6 @@ import pcmember.utility.*;
 import pcmember.exception.*;
 import pcmember.repository.*;
 import pcmember.request.*;
-import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
 import org.springframework.web.client.RestTemplate;
@@ -278,7 +277,7 @@ public class ReviewService {
             count[i] -= 1;
             ass[p] = 0;
         }
-    } 
+    }
     public ResponseWrapper<?> reviewPublish(ResultPublishRequest request) {
         Meeting meeting = restRPC.meetingFindByMeetingName(request.getMeetingName());
         if (meeting == null) {
