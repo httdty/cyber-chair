@@ -1,26 +1,16 @@
 package adminmeeting.api;
 
 import adminmeeting.config.RemoteServiceConfig;
-import adminmeeting.domain.Article;
 import adminmeeting.domain.User;
 import adminmeeting.utility.ApiUtil;
-import adminmeeting.utility.response.ResponseGenerator;
-import adminmeeting.utility.response.ResponseWrapper;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.LinkedHashMap;
-import java.util.List;
 
 public class UserApi {
     @Autowired

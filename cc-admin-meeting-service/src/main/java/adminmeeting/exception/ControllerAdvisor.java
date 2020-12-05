@@ -1,6 +1,5 @@
-package adminmeeting.adminmeeting.exception;
+package adminmeeting.exception;
 
-import adminmeeting.exception.*;
 import adminmeeting.exception.user.ArticleNotFoundException;
 import adminmeeting.utility.response.ResponseWrapper;
 import org.springframework.http.HttpStatus;

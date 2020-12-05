@@ -25,16 +25,11 @@ import java.util.Set;
 
 @Service
 public class MeetingUtilService {
-//    @Autowired
-//    private UserRepository userRepository;
+
     @Autowired
     private MeetingRepository meetingRepository;
     @Autowired
     private PCMemberRelationRepository pcMemberRelationRepository;
-
-
-//    @Autowired
-//    private ArticleRepository articleRepository;
 
     private UserApi userApi = new UserApi();
     private ArticleApi articleApi = new ArticleApi();
@@ -44,14 +39,6 @@ public class MeetingUtilService {
         this.meetingRepository = meetingRepository;
         this.pcMemberRelationRepository = pcMemberRelationRepository;
     }
-
-//    @Autowired
-//    public MeetingUtilService(UserRepository userRepository, MeetingRepository meetingRepository, PCMemberRelationRepository pcMemberRelationRepository,ArticleRepository articleRepository) {
-//        this.userRepository = userRepository;
-//        this.meetingRepository = meetingRepository;
-//        this.pcMemberRelationRepository = pcMemberRelationRepository;
-//        this.articleRepository = articleRepository;
-//    }
 
     public ResponseWrapper<?> meetingApplication(MeetingApplicationRequest request, String token){
         if (userApi.findByUsername(request.getChairName(), token) == null) {

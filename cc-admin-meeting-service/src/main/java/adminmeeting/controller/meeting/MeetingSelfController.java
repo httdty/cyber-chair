@@ -4,7 +4,6 @@ package adminmeeting.controller.meeting;
 import adminmeeting.config.RemoteServiceConfig;
 import adminmeeting.domain.Meeting;
 import adminmeeting.domain.PCMemberRelation;
-//import adminmeeting.repository.ArticleRepository;
 import adminmeeting.repository.MeetingRepository;
 import adminmeeting.repository.PCMemberRelationRepository;
 import adminmeeting.service.Service;
@@ -39,26 +38,7 @@ public class MeetingSelfController {
 
     @Autowired
     public MeetingSelfController(Service service) { this.service = service; }
-//
-//    @GetMapping("/meeting/queueingApplication")
-//    public ResponseEntity<?> queueingApplication() {
-//        logger.debug("Get queuing meeting by admin");
-//        return ResponseEntity.ok(service.queueingApplication());
-//    }
-//
-//    @GetMapping("/meeting/alreadyApplication")
-//    public ResponseEntity<?> alreadyApplication() {
-//        logger.debug("Get dealed metting by admin");
-//        return ResponseEntity.ok(service.alreadyApplication());
-//    }
-//
-//    @PostMapping("/meeting/ratify")
-//    public ResponseEntity<?> mt_applicationRatify(@RequestBody ApplicationRatifyRequest request) {
-//        logger.debug("Ratification for Meeting named "+ request.getMeetingName());
-//        return ResponseEntity.ok(service.mt_applicationRatify(request));
-//    }
 
-    /////////////////////////////////////////////////////////////////////
     public HttpStatus checkToken(String token){
         String checkApi = remote.getCheck(); //检查token
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -87,6 +67,7 @@ public class MeetingSelfController {
         Meeting meeting = meetingRepository.findById(meetingId);
         return ResponseEntity.ok(meeting);
     }
+
     @ApiOperation(value = "根据chairName查找meeting列表", response = Meeting.class, responseContainer = "List")
     @GetMapping("/meeting/getByChairName")
     public ResponseEntity<?> mt_getByChairName(String chairName) {

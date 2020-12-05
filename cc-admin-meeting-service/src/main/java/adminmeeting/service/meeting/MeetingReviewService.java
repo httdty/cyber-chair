@@ -19,20 +19,12 @@ import java.util.*;
 
 @Service
 public class MeetingReviewService {
-//    @Autowired
-//    private UserRepository userRepository;
-//    @Autowired
-//    private ArticleRepository articleRepository;
+
     @Autowired
     private MeetingRepository meetingRepository;
     @Autowired
     private PCMemberRelationRepository pcMemberRelationRepository;
-//    @Autowired
-//    private ReviewRelationRepository reviewRelationRepository;
-//    @Autowired
-//    private PostRepository postRepository;
-//    @Autowired
-//    private RebuttalRepository rebuttalRepository;
+
 
     private UserApi userApi = new UserApi();
     private ReviewRelationApi reviewRelationApi = new ReviewRelationApi();
@@ -45,19 +37,6 @@ public class MeetingReviewService {
         this.meetingRepository = meetingRepository;
         this.pcMemberRelationRepository = pcMemberRelationRepository;
     }
-//
-//    @Autowired
-//    public MeetingReviewService(UserRepository userRepository, ArticleRepository articleRepository, MeetingRepository meetingRepository, PCMemberRelationRepository pcMemberRelationRepository, ReviewRelationRepository reviewRelationRepository,PostRepository postRepository,RebuttalRepository rebuttalRepository) {
-//        this.userRepository = userRepository;
-//        this.articleRepository = articleRepository;
-//        this.meetingRepository = meetingRepository;
-//        this.pcMemberRelationRepository = pcMemberRelationRepository;
-//        this.reviewRelationRepository = reviewRelationRepository;
-//        this.postRepository = postRepository;
-//        this.rebuttalRepository = rebuttalRepository;
-//    }
-
-
 
     @Transactional
     public ResponseWrapper<?> reviewPost(ReviewPostRequest request, String token) {

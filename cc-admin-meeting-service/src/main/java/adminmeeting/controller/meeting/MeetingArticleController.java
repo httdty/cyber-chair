@@ -1,7 +1,6 @@
 package adminmeeting.controller.meeting;
 
 import adminmeeting.config.RemoteServiceConfig;
-import adminmeeting.domain.Article;
 import adminmeeting.request.meeting.BeginReviewRequest;
 import adminmeeting.request.meeting.BeginSubmissionRequest;
 import adminmeeting.request.meeting.ResultPublishRequest;
@@ -12,7 +11,6 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;

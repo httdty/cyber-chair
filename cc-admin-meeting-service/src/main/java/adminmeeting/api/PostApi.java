@@ -1,9 +1,7 @@
 package adminmeeting.api;
 
 import adminmeeting.config.RemoteServiceConfig;
-import adminmeeting.domain.Article;
 import adminmeeting.domain.PostMessage;
-import adminmeeting.domain.User;
 import adminmeeting.utility.ApiUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;

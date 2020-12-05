@@ -1,7 +1,6 @@
 package adminmeeting.api;
 
 import adminmeeting.config.RemoteServiceConfig;
-import adminmeeting.domain.PostMessage;
 import adminmeeting.domain.Rebuttal;
 import adminmeeting.utility.ApiUtil;
 import org.springframework.beans.factory.annotation.Autowired;
