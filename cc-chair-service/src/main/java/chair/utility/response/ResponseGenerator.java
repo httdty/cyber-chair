@@ -1,6 +1,7 @@
 package chair.utility.response;
 
-import javafx.util.Pair;
+
+import chair.utility.Pair;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

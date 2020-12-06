@@ -51,7 +51,7 @@ public class MeetingArticleService {
 
         String meetingStatus = meeting.getStatus();
         if(!meetingStatus.equals(MeetingStatus.applyPassed)){
-            throw new MeetingUnavaliableToOperateException(meetingName);
+            throw new MeetingUnavaliableToOpe`rateException(meetingName);
         }
         meeting.setStatus(MeetingStatus.submissionAvaliable);
         meetingRepository.save(meeting);

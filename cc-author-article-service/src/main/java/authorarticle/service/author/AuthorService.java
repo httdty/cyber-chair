@@ -12,11 +12,11 @@ import authorarticle.response.MeetingResponse;
 import authorarticle.response.ReviewRelationResponse;
 import authorarticle.response.UserResponse;
 import authorarticle.utility.ApiUtil;
+import authorarticle.utility.Pair;
 import authorarticle.utility.contract.ArticleStatus;
 import authorarticle.utility.contract.MeetingStatus;
 import authorarticle.utility.response.ResponseGenerator;
 import authorarticle.utility.response.ResponseWrapper;
-import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -319,6 +319,7 @@ public class AuthorService {
     }
 
     private UserResponse findUserByUsername(String username) {
+        System.out.println(username);
         MultiValueMap<String, String> paramsUser = new LinkedMultiValueMap<>();
         paramsUser.add("username", username);
         ResponseEntity<UserResponse> resUser = restTemplate.exchange(

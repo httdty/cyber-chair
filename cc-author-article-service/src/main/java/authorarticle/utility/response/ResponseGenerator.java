@@ -1,6 +1,7 @@
 package authorarticle.utility.response;
 
-import javafx.util.Pair;
+
+import authorarticle.utility.Pair;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

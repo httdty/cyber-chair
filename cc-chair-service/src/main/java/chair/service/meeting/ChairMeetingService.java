@@ -3,7 +3,6 @@ package chair.service.meeting;
 import chair.config.RemoteServiceConfig;
 import chair.domain.*;
 import chair.exception.*;
-import chair.repository.*;
 import chair.request.meeting.*;
 import chair.utility.ApiUtil;
 import chair.utility.contract.*;
