@@ -26,7 +26,7 @@ public class Article {
     @Column(columnDefinition = "BLOB")
     private Set<Pair<Author,Integer>> authors;
 
-    public Article(){};
+    public Article(){}
 
     public Article(String contributorName, String meetingName, String submitDate, String title, String articleAbstract, String filePath, String status, Set<String> topic, Set<Pair<Author, Integer>> authors) {
         this.contributorName = contributorName;
@@ -38,6 +38,22 @@ public class Article {
         this.status = status;
         this.topic = topic;
         this.authors = authors;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", contributorName='" + contributorName + '\'' +
+                ", meetingName='" + meetingName + '\'' +
+                ", submitDate='" + submitDate + '\'' +
+                ", title='" + title + '\'' +
+                ", articleAbstract='" + articleAbstract + '\'' +
+                ", filePath='" + filePath + '\'' +
+                ", status='" + status + '\'' +
+                ", topic=" + topic +
+                ", authors=" + authors +
+                '}';
     }
 
     public Long getId() {
