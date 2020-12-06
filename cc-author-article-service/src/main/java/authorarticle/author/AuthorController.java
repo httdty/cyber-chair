@@ -4,11 +4,11 @@ import authorarticle.config.RemoteServiceConfig;
 import authorarticle.domain.Author;
 import authorarticle.request.ArticleRequest;
 import authorarticle.service.Service;
+import authorarticle.utility.Pair;
 import authorarticle.utility.response.ResponseWrapper;
 import com.alibaba.fastjson.JSONArray;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import javafx.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +72,7 @@ public class AuthorController {
 //    }
 
     @ApiOperation(value = "获取一个author投稿过的所有的meeting", response = ResponseWrapper.class)
-    @GetMapping("/user/authorMeeting")
+    @GetMapping("/user/")
     public ResponseEntity<?> authorMeeting(String username, @RequestHeader("authorization") String token) {
         logger.debug("Get author meeting info : " + username);
         if (checkUser(token)) {

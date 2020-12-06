@@ -1,6 +1,6 @@
 package authorarticle.request;
 import authorarticle.domain.Author;
-import javafx.util.Pair;
+import authorarticle.utility.Pair;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Set;
@@ -28,18 +28,6 @@ public class ArticleRequest {
         this.topic = topic;
         this.authors = authors;
     }
-
-    public ArticleRequest(ArticleRequest articleRequest) {
-        this.meetingName = articleRequest.getMeetingName();
-        this.username = articleRequest.getUsername();
-        this.essayTitle = articleRequest.getEssayTitle();
-        this.essayAbstract = articleRequest.getEssayAbstract();
-        this.submitDate = articleRequest.getSubmitDate();
-        this.file = articleRequest.getFile();
-        this.topic = articleRequest.getTopics();
-        this.authors = articleRequest.getAuthors();
-    }
-
 
 
     public String getUsername() {
