@@ -27,9 +27,12 @@ public class MeetingArticleService {
     @Autowired
     private PCMemberRelationRepository pcMemberRelationRepository;
 
-    private UserApi userApi = new UserApi();
-    private ReviewRelationApi reviewRelationApi = new ReviewRelationApi();
-    private ArticleApi articleApi = new ArticleApi();
+    @Autowired
+    private UserApi userApi;
+    @Autowired
+    private ReviewRelationApi reviewRelationApi;
+    @Autowired
+    private ArticleApi articleApi;
 
 
 
@@ -51,7 +54,7 @@ public class MeetingArticleService {
 
         String meetingStatus = meeting.getStatus();
         if(!meetingStatus.equals(MeetingStatus.applyPassed)){
-            throw new MeetingUnavaliableToOpe`rateException(meetingName);
+            throw new MeetingUnavaliableToOperateException(meetingName);
         }
         meeting.setStatus(MeetingStatus.submissionAvaliable);
         meetingRepository.save(meeting);

@@ -54,17 +54,17 @@ public class MeetingSelfController {
         logger.debug("Get Meeting By Name: " + meetingName);
 
 //        if(this.checkToken(token)!= HttpStatus.OK){ return ResponseEntity.badRequest().build(); } // 检查
-
+        meetingName = meetingName.replaceAll("%20", " ");
         Meeting meeting = meetingRepository.findByMeetingName(meetingName);
 
         return ResponseEntity.ok(meeting);
     }
     @ApiOperation(value = "根据meetingId查找meeting", response = Meeting.class)
     @GetMapping("/meeting/getById")
-    public ResponseEntity<?> mt_getById(long meetingId) {
+    public ResponseEntity<?> mt_getById(String meetingId) {
         logger.debug("Get Meeting By Id: " + meetingId);
 //        if(this.checkToken(token)!= HttpStatus.OK){ return ResponseEntity.badRequest().build(); } // 检查
-        Meeting meeting = meetingRepository.findById(meetingId);
+        Meeting meeting = meetingRepository.findById(Long.parseLong(meetingId));
         return ResponseEntity.ok(meeting);
     }
 
@@ -105,42 +105,42 @@ public class MeetingSelfController {
 
     @ApiOperation(value = "通过meetingId来获取该meeting下的所有pcMemberRelation", response = PCMemberRelation.class,responseContainer = "List")
     @GetMapping("/meeting/pcMemberRelation/getByMeetingId")
-    public ResponseEntity<?> mt_pcrelation_getByMeetingId(long meetingId) {
+    public ResponseEntity<?> mt_pcrelation_getByMeetingId(String meetingId) {
         logger.debug("Get PCMemberRelation By MeetingId: " + meetingId);
 //        if(this.checkToken(token)!= HttpStatus.OK){ return ResponseEntity.badRequest().build(); } // 检查
-        List<PCMemberRelation> pcMemberRelations = pcMemberRelationRepository.findByMeetingId(meetingId);
+        List<PCMemberRelation> pcMemberRelations = pcMemberRelationRepository.findByMeetingId(Long.parseLong(meetingId));
         return ResponseEntity.ok(pcMemberRelations);
     }
     @ApiOperation(value = "通过pcmemberId和状态来筛选所有pcMemberRelation", response = PCMemberRelation.class,responseContainer = "List")
     @GetMapping("/meeting/pcMemberRelation/getByPcmemberIdAndStatus")
-    public ResponseEntity<?> mt_pcrelation_getByPcmemberIdAndStatus(long pcmemberId, String status) {
+    public ResponseEntity<?> mt_pcrelation_getByPcmemberIdAndStatus(String pcmemberId, String status) {
         logger.debug("getByPcmemberIdAndStatus");
 //        if(this.checkToken(token)!= HttpStatus.OK){ return ResponseEntity.badRequest().build(); } // 检查
-        List<PCMemberRelation> pcMemberRelations = pcMemberRelationRepository.findByPcmemberIdAndStatus(pcmemberId, status);
+        List<PCMemberRelation> pcMemberRelations = pcMemberRelationRepository.findByPcmemberIdAndStatus(Long.parseLong(pcmemberId), status);
         return ResponseEntity.ok(pcMemberRelations);
     }
     @ApiOperation(value = "通过pcmemberId和MeetingId来筛选所有pcMemberRelation", response = PCMemberRelation.class,responseContainer = "List")
     @GetMapping("/meeting/pcMemberRelation/getByPcmemberIdAndMeetingId")
-    public ResponseEntity<?> mt_pcrelation_getByPcmemberIdAndMeetingId(long pcmemberId, long meetingId) {
+    public ResponseEntity<?> mt_pcrelation_getByPcmemberIdAndMeetingId(String pcmemberId, String meetingId) {
         logger.debug("getByPcmemberIdAndMeetingId");
 //        if(this.checkToken(token)!= HttpStatus.OK){ return ResponseEntity.badRequest().build(); } // 检查
-        List<PCMemberRelation> pcMemberRelations = pcMemberRelationRepository.findByPcmemberIdAndMeetingId(pcmemberId, meetingId);
+        List<PCMemberRelation> pcMemberRelations = pcMemberRelationRepository.findByPcmemberIdAndMeetingId(Long.parseLong(pcmemberId), Long.parseLong(meetingId));
         return ResponseEntity.ok(pcMemberRelations);
     }
     @ApiOperation(value = "通过meetingId和状态来筛选所有pcMemberRelation", response = PCMemberRelation.class,responseContainer = "List")
     @GetMapping("/meeting/pcMemberRelation/getByMeetingIdAndStatus")
-    public ResponseEntity<?> mt_pcrelation_getByMeetingIdAndStatus(long meetingId,String status) {
+    public ResponseEntity<?> mt_pcrelation_getByMeetingIdAndStatus(String meetingId,String status) {
         logger.debug("getByMeetingIdAndStatus");
 //        if(this.checkToken(token)!= HttpStatus.OK){ return ResponseEntity.badRequest().build(); } // 检查
-        List<PCMemberRelation> pcMemberRelations = pcMemberRelationRepository.findByMeetingIdAndStatus(meetingId, status);
+        List<PCMemberRelation> pcMemberRelations = pcMemberRelationRepository.findByMeetingIdAndStatus(Long.parseLong(meetingId), status);
         return ResponseEntity.ok(pcMemberRelations);
     }
     @ApiOperation(value = "通过pcmemberId和非状态来筛选所有pcMemberRelation", response = PCMemberRelation.class,responseContainer = "List")
     @GetMapping("/meeting/pcMemberRelation/getByPcmemberIdAndStatusNot")
-    public ResponseEntity<?> mt_pcrelation_getByPcmemberIdAndStatusNot(long pcmemberId, String status) {
+    public ResponseEntity<?> mt_pcrelation_getByPcmemberIdAndStatusNot(String pcmemberId, String status) {
         logger.debug("getByPcmemberIdAndStatusNot");
 //        if(this.checkToken(token)!= HttpStatus.OK){ return ResponseEntity.badRequest().build(); } // 检查
-        List<PCMemberRelation> pcMemberRelations = pcMemberRelationRepository.findByPcmemberIdAndStatusNot(pcmemberId, status);
+        List<PCMemberRelation> pcMemberRelations = pcMemberRelationRepository.findByPcmemberIdAndStatusNot(Long.parseLong(pcmemberId), status);
         return ResponseEntity.ok(pcMemberRelations);
     }
     @ApiOperation(value = "通过put来修改数据库中pcMemberRelation", response = PCMemberRelation.class)

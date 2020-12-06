@@ -8,10 +8,14 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+@Component
 public class UserApi {
     @Autowired
     private RestTemplate restTemplate;
@@ -26,10 +30,12 @@ public class UserApi {
         params.add("username", name);
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, httpHeaders);
         ApiUtil apiUtil = new ApiUtil();
+        System.out.println("url" + remote.getFindUserByName());
+        System.out.println("encode url" + apiUtil.encodeUriForGet(params, remote.getFindUserByName()));
         ResponseEntity<User> resp = restTemplate.exchange(
                 apiUtil.encodeUriForGet(params, remote.getFindUserByName()),
                 HttpMethod.GET,
-                entity,
+                null,
                 User.class);
         User user = resp.getBody();
         return user;

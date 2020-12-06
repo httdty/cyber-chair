@@ -25,12 +25,16 @@ public class MeetingReviewService {
     @Autowired
     private PCMemberRelationRepository pcMemberRelationRepository;
 
-
-    private UserApi userApi = new UserApi();
-    private ReviewRelationApi reviewRelationApi = new ReviewRelationApi();
-    private ArticleApi articleApi = new ArticleApi();
-    private PostApi postApi = new PostApi();
-    private RebuttalApi rebuttalApi = new RebuttalApi();
+    @Autowired
+    private UserApi userApi;
+    @Autowired
+    private ReviewRelationApi reviewRelationApi;
+    @Autowired
+    private ArticleApi articleApi;
+    @Autowired
+    private PostApi postApi;
+    @Autowired
+    private RebuttalApi rebuttalApi;
 
     @Autowired
     public MeetingReviewService(MeetingRepository meetingRepository, PCMemberRelationRepository pcMemberRelationRepository) {

@@ -127,7 +127,7 @@ public class AuthorController {
                     meetingName, username, essayTitle, essayAbstract,
                     submitTime, pdfFile, topic, authorArgument
             );
-            String parentDir = servletRequest.getServletContext().getRealPath("src/resources/");
+            String parentDir = servletRequest.getServletContext().getRealPath("./data");
             return ResponseEntity.ok(service.submitNewArticle(request, parentDir));
         } else {
             return ResponseEntity.badRequest().build();
@@ -160,7 +160,7 @@ public class AuthorController {
             );
 
 
-            String parentDir = servletRequest.getServletContext().getRealPath("src/resources/static/");
+            String parentDir = servletRequest.getServletContext().getRealPath("./data/static/");
             return ResponseEntity.ok(service.updateArticle(articleId, request, parentDir));
         } else {
             return ResponseEntity.badRequest().build();

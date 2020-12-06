@@ -22,15 +22,18 @@ public class Service {
 
     private AuthorService authorService;
     private ArticleService articleService;
+    private UtilService utilService;
     private static String fetched = " have been fetched";
     private static String requested = " have been requested";
     private static String forArticle = "for Article ";
 
     @Autowired
-    public Service(AuthorService authorService, ArticleService articleService) {
+    public Service(AuthorService authorService, ArticleService articleService, UtilService utilService) {
         this.authorService = authorService;
         this.articleService = articleService;
+        this.utilService = utilService;
     }
+
 
     public Service() {
     }
@@ -123,6 +126,14 @@ public class Service {
         Boolean ret = articleService.saveArticle(article);
         logger.debug("Data access saveArticle " + article.toString() + " is requested");
         return ret;
+    }
+
+    public byte[] getPdfContent(String pdfUrl) {
+        byte[] ret = utilService.getPdfContent(pdfUrl);
+        if(ret!=null){
+            logger.debug("File content of  "+ pdfUrl +" has been fetched");
+        }
+        return  ret;
     }
 
 //

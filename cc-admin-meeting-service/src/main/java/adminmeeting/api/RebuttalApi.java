@@ -1,6 +1,7 @@
 package adminmeeting.api;
 
 import adminmeeting.config.RemoteServiceConfig;
+import adminmeeting.domain.PostMessage;
 import adminmeeting.domain.Rebuttal;
 import adminmeeting.utility.ApiUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -16,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Objects;
 
+@Component
 public class RebuttalApi {
     @Autowired
     private RestTemplate restTemplate;
@@ -24,16 +27,20 @@ public class RebuttalApi {
     private RemoteServiceConfig remote;
 
     public Rebuttal save(Rebuttal rebuttal, String token){
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        //httpHeaders.set("authorization", token);
+//        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
+//        params.add("rebuttal", rebuttal);
+//        HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(params, httpHeaders);
+//        restTemplate.exchange(
+//                remote.getSaveRebuttal(),
+//                HttpMethod.POST,
+//                entity,
+//                Rebuttal.class);
+//        return rebuttal;
         HttpHeaders httpHeaders = new HttpHeaders();
-        //httpHeaders.set("authorization", token);
-        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
-        params.add("rebuttal", rebuttal);
-        HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(params, httpHeaders);
-        restTemplate.exchange(
-                remote.getSaveRebuttal(),
-                HttpMethod.POST,
-                entity,
-                Rebuttal.class);
+        HttpEntity<Rebuttal> entity = new HttpEntity<>(rebuttal, httpHeaders);
+        String answer = restTemplate.postForObject(remote.getSaveRebuttal(), entity, String.class );
         return rebuttal;
     }
 

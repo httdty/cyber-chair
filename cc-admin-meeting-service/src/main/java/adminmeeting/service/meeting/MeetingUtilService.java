@@ -31,8 +31,11 @@ public class MeetingUtilService {
     @Autowired
     private PCMemberRelationRepository pcMemberRelationRepository;
 
-    private UserApi userApi = new UserApi();
-    private ArticleApi articleApi = new ArticleApi();
+    @Autowired
+    private UserApi userApi;
+
+    @Autowired
+    private ArticleApi articleApi;
 
     @Autowired
     public MeetingUtilService(MeetingRepository meetingRepository, PCMemberRelationRepository pcMemberRelationRepository) {
@@ -41,6 +44,7 @@ public class MeetingUtilService {
     }
 
     public ResponseWrapper<?> meetingApplication(MeetingApplicationRequest request, String token){
+        System.out.println(request.getChairName());
         if (userApi.findByUsername(request.getChairName(), token) == null) {
             throw new UserNamedidntExistException(request.getChairName());
         }//chair是否是一个用户

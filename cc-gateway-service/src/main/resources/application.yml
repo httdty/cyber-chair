@@ -12,7 +12,7 @@ spring:
         - id: route-for-cc-author-article-service
           uri: lb://cc-author-article-service
           predicates:
-            - Path=/article/findArticleById,/article/findArticleByIdNot,/article/findArticleByContributorName,/article/findArticleByMeetingName,/article/findArticleByMeetingNameAndStatus,/article/findArticleByContributorNameAndMeetingName,/article/save,/user/authorMeeting,/meeting/submissionList,/user/articleDetail,/user/articleSubmission,/user/updateArticle
+            - Path=/utils/pdf,/article/findArticleById,/article/findArticleByIdNot,/article/findArticleByContributorName,/article/findArticleByMeetingName,/article/findArticleByMeetingNameAndStatus,/article/findArticleByContributorNameAndMeetingName,/article/save,/user/authorMeeting,/meeting/submissionList,/user/articleDetail,/user/articleSubmission,/user/updateArticle
         - id: route-for-cc-admin-meeting-service
           uri: lb://cc-admin-meeting-service
           predicates: # Path 配置对应的url，比如配置了/welcome, 那么请求localhost:9999/welcome -> cc-user-auth-service/welcome
@@ -32,5 +32,5 @@ eureka:
   client:
     registry-fetch-interval-seconds: 3
     service-url:
-      defaultZone: http://192.168.31.112:9091/eureka/
+      defaultZone: http://192.168.31.214:9091/eureka/
 

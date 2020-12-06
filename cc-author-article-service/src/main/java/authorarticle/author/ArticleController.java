@@ -8,9 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Controller for repository
@@ -78,5 +76,18 @@ public class ArticleController {
     public ResponseEntity<?> saveArticle(Article article) {
         logger.debug("Article repository accessed "+article.toString());
         return ResponseEntity.ok(service.saveArticle(article));
+    }
+
+    @PostMapping("/article/save")
+    public ResponseEntity<?> saveArticle_post(Article article) {
+        logger.debug("Article repository accessed "+article.toString());
+        return ResponseEntity.ok(service.saveArticle(article));
+    }
+
+    @GetMapping("/utils/pdf")
+    @ResponseBody
+    public byte[] getImage(String pdfUrl)  {
+        logger.debug("Get file for pdfUrl " + pdfUrl + " : ");
+        return service.getPdfContent(pdfUrl);
     }
 }

@@ -9,6 +9,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -16,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Objects;
 
+@Service
 public class ArticleApi {
     @Autowired
     private RestTemplate restTemplate;
@@ -59,16 +62,20 @@ public class ArticleApi {
     }
 
     public Article save(Article article, String token){
+//        HttpHeaders httpHeaders = new HttpHeaders();
+////        httpHeaders.set("authorization", token);
+//        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
+//        params.add("article", article);
+//        HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(params, httpHeaders);
+//        restTemplate.exchange(
+//                remote.getSaveArticle(),
+//                HttpMethod.PUT,
+//                entity,
+//                Article.class);
+//        return article;
         HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.set("authorization", token);
-        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
-        params.add("article", article);
-        HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(params, httpHeaders);
-        restTemplate.exchange(
-                remote.getSaveArticle(),
-                HttpMethod.PUT,
-                entity,
-                Article.class);
+        HttpEntity<Article> entity = new HttpEntity<>(article, httpHeaders);
+        String answer = restTemplate.postForObject(remote.getSaveArticle(), entity, String.class );
         return article;
     }
 

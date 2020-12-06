@@ -1,6 +1,7 @@
 package adminmeeting.api;
 
 import adminmeeting.config.RemoteServiceConfig;
+import adminmeeting.domain.Rebuttal;
 import adminmeeting.domain.ReviewRelation;
 import adminmeeting.utility.ApiUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -16,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Objects;
 
+@Component
 public class ReviewRelationApi {
     @Autowired
     private RestTemplate restTemplate;
@@ -43,16 +46,20 @@ public class ReviewRelationApi {
     }
 
     public ReviewRelation save(ReviewRelation reviewRelation, String token){
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        //httpHeaders.set("authorization", token);
+//        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
+//        params.add("reviewRelation", reviewRelation);
+//        HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(params, httpHeaders);
+//        restTemplate.exchange(
+//                remote.getSaveReviewRelation(),
+//                HttpMethod.POST,
+//                entity,
+//                ReviewRelation.class);
+//        return reviewRelation;
         HttpHeaders httpHeaders = new HttpHeaders();
-        //httpHeaders.set("authorization", token);
-        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
-        params.add("reviewRelation", reviewRelation);
-        HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(params, httpHeaders);
-        restTemplate.exchange(
-                remote.getSaveReviewRelation(),
-                HttpMethod.POST,
-                entity,
-                ReviewRelation.class);
+        HttpEntity<ReviewRelation> entity = new HttpEntity<>(reviewRelation, httpHeaders);
+        String answer = restTemplate.postForObject(remote.getSaveReviewRelation(), entity, String.class );
         return reviewRelation;
     }
 
