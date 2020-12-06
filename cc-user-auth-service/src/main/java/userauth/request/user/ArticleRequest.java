@@ -1,8 +1,8 @@
 package userauth.request.user;
 
 import userauth.domain.Author;
-import javafx.util.Pair;
 import org.springframework.web.multipart.MultipartFile;
+import userauth.domain.Pair;
 
 import java.util.Set;
 

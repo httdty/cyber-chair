@@ -43,7 +43,17 @@ public class UserAuthApplication {
                     );
                     userRepository.save(admin);
                 }
-
+                if (userRepository.findByUsername("test123") == null) {
+                    User testUser = new User(
+                            "test123",
+                            "test",
+                            BCrypt.hashpw("12345qwert", BCrypt.gensalt()),
+                            "test@123.com",
+                            "fudan",
+                            "shanghai"
+                    );
+                    userRepository.save(testUser);
+                }
             }
 
 
