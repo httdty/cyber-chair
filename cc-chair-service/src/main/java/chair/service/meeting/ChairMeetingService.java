@@ -84,9 +84,9 @@ public class ChairMeetingService {
 
         //User user = userRepository.findByUsername(request.getPcMemberName());
         User user = UserGet(request.getPcMemberName());
-        if (user == null) {
-            throw new UserNamedidntExistException(request.getPcMemberName());
-        }//邀请对象是否存在邀请
+//        if (user == null) {
+//            throw new UserNamedidntExistException(request.getPcMemberName());
+//        }//邀请对象是否存在邀请
 
         PCMemberRelation pcMemberRelation = new PCMemberRelation(user.getId(), meeting.getId(), PCmemberRelationStatus.undealed, null);
         PCMemberRelationPost(pcMemberRelation);
@@ -127,7 +127,7 @@ public class ChairMeetingService {
         String meetingName = request.getMeetingName();
         Meeting meeting = MeetingGet(meetingName);
         //Meeting meeting = meetingRepository.findByMeetingName(request.getMeetingName());//在更新最终publish意见时，meeting表已经建立
-        if (meeting.getStatus().equals(MeetingStatus.reviewFinish)) {
+        if (meeting.getStatus().equals(MeetingStatus.reviewFinish)||meeting.getStatus().equals(MeetingStatus.reviewConfirmed)) {
             meeting.setStatus(MeetingStatus.reviewPublish);
             MeetingPost(meeting);
            // meetingRepository.save(meeting);
@@ -179,17 +179,19 @@ public class ChairMeetingService {
     public void MeetingPost(Meeting meeting){
 
 //
-
-        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
-        params.add("Meeting", meeting);
-
-        HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(params);
-        //发送meetingStatus
-        restTemplate.exchange(
-                remote.getUpdateMeetingStatus(),//接口
-                HttpMethod.POST,
-                entity,
-                Meeting.class);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        HttpEntity<Meeting> entity = new HttpEntity<>(meeting,httpHeaders);
+        restTemplate.postForObject(remote.getUpdateMeetingStatus(),entity,String.class);
+//        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
+//        params.add("Meeting", meeting);
+//
+//        HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(params);
+//        //发送meetingStatus
+//        restTemplate.exchange(
+//                remote.getUpdateMeetingStatus(),//接口
+//                HttpMethod.POST,
+//                entity,
+//                Meeting.class);
 
     }
     public void PCMemberRelationPost( PCMemberRelation pcMemberRelation){

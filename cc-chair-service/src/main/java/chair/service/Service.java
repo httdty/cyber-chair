@@ -20,7 +20,7 @@ public class Service {
     Logger logger = LoggerFactory.getLogger(Service.class);
 
 
-
+    @Autowired
     private ChairMeetingService chairMeetingService;
     private static String fetched = " have been fetched";
     private static String requested = " have been requested";

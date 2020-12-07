@@ -20,7 +20,7 @@ spring:
         - id: route-for-cc-chair-service
           uri: lb://cc-chair-service
           predicates:
-            - Path=/meeting/beginSubmission,/meeting/publish,/meeting/pcmInvitation
+            - Path=/meeting/beginSubmission,/meeting/publish,/meeting/pcmInvitation,/meeting/finalPublish
         - id: route-for-cc-pcmember-service # routes id 自己设置一个就好
           uri: lb://cc-pcmember-service # lb://{eureka注册服务的名称}
           predicates: # Path 配置对应的url，比如配置了/welcome, 那么请求localhost:9999/welcome -> cc-pcmember-service/welcome

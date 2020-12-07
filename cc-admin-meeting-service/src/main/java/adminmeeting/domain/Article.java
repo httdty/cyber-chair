@@ -1,7 +1,8 @@
 package adminmeeting.domain;
 
 
-import javafx.util.Pair;
+
+import adminmeeting.utility.Pair;
 
 import javax.persistence.*;
 import java.util.Set;

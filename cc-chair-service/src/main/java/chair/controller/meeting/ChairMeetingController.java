@@ -61,6 +61,7 @@ public class ChairMeetingController {
         logger.debug("Review Request to Publish: " + request.toString());
         return ResponseEntity.ok(service.reviewPublish(request));
     }
+
     @ApiOperation(value = "将meeting状态设置成reviewPublish", response = Meeting.class)
     @PostMapping("/meeting/finalPublish")
     public ResponseEntity<?> finalPublish(@RequestBody FinalPublishRequest request,@RequestHeader("authorization") String token) {

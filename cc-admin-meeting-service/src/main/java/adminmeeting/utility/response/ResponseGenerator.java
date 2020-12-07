@@ -1,6 +1,7 @@
 package adminmeeting.utility.response;
 
-import javafx.util.Pair;
+
+import adminmeeting.utility.Pair;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

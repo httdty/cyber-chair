@@ -1,8 +1,5 @@
 package chair.domain;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,12 +7,12 @@ import javax.persistence.Id;
 import java.util.Collection;
 
 //@Entity
-public class User implements UserDetails {
+public class User{
 
     private static final long serialVersionUID = -6140085056226164016L;
 
 //    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String username;
@@ -35,48 +32,9 @@ public class User implements UserDetails {
         this.institution = institution;
         this.region = region;
     }
-    public User(User user) {
-        this.username = user.getUsername();
-        this.fullname = user.getFullname();
-        this.password = user.getPassword();
-        this.email = user.getEmail();
-        this.institution = user.getInstitution();
-        this.region = user.getRegion();
-    }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.username;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Long getId() {
@@ -85,6 +43,10 @@ public class User implements UserDetails {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public void setUsername(String username) {
@@ -97,6 +59,10 @@ public class User implements UserDetails {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
@@ -127,5 +93,13 @@ public class User implements UserDetails {
         this.region = region;
     }
 
-
+    public User(Long id, String username, String fullname, String password, String email, String institution, String region) {
+        this.id = id;
+        this.username = username;
+        this.fullname = fullname;
+        this.password = password;
+        this.email = email;
+        this.institution = institution;
+        this.region = region;
+    }
 }

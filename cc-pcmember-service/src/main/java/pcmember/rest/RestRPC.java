@@ -35,7 +35,7 @@ public class RestRPC {
 //    private String check_auth="http://http://192.168.31.112:8080/check";
     private String user_findName="http://cc-user-auth-service/user/username";
     private String user_findId="http://cc-user-auth-service/user/id";
-    private String user_findEmail="http://lcc-user-auth-service/user/email";
+    private String user_findEmail="http://cc-user-auth-service/user/email";
     private String user_findFullAdEmail="http://cc-user-auth-service/user/author";
     private String meet_findName="http://cc-admin-meeting-service/meeting/getByName";
     private String meet_findId="http://cc-admin-meeting-service/meeting/getById";
@@ -45,7 +45,7 @@ public class RestRPC {
     private String article_save="http://cc-author-article-service/article/save";
     private String article_findNameAdSt="http://cc-author-article-service/article/findArticleByMeetingNameAndStatus";
 //    TODO: 下面的地址不知道对不对
-    private String pcmember_findIdAdSt="http://cc-admin-meeting-service/meeting/pcMemberRelation/getByPcmemberIdAndStatus";
+    private String pcmember_findIdAdSt="http://cc-admin-meeting-service/meeting/pcMemberRelation/getByMeetingIdAndStatus";
     private String check_auth="http://cc-user-auth-service/check";
     //=====================user=====================
     public User userFindByUsername(String userName){
@@ -89,12 +89,9 @@ public class RestRPC {
         ResponseEntity<Meeting> resp = restTemplate.exchange(encodeUriForGet(params,meet_findId), HttpMethod.GET,null,Meeting.class);
         return resp.getBody();
     }
-    public Meeting meetingSave(Meeting meeting){
-        Map<String,Object> params= new HashMap<>();
-        params.put("meeting",meeting);
-        HttpEntity entity = new HttpEntity<>(params,headers);
-        ResponseEntity<Meeting> resp = restTemplate.exchange(meet_save, HttpMethod.POST,entity,Meeting.class);
-        return resp.getBody();
+    public void meetingSave(Meeting meeting){
+        HttpEntity<Meeting> entity = new HttpEntity<Meeting>(meeting,headers);
+        String answer = restTemplate.postForObject(meet_save, entity, String.class);
     }
 
     //=====================article=====================
@@ -112,11 +109,9 @@ public class RestRPC {
     }
 
     public String articleSave(Article article){
-        Map<String,Object> params= new HashMap<>();
-        params.put("article",article);
-        HttpEntity entity = new HttpEntity<>(params,headers);
-        ResponseEntity<String> resp = restTemplate.exchange(article_save, HttpMethod.POST,entity,String.class);
-        return resp.getBody();
+        HttpEntity entity = new HttpEntity<>(article,headers);
+        String resp = restTemplate.postForObject(article_save, entity,String.class);
+        return resp;
     }
     public List<Article> articleFindByMeetingNameAndStatus(String meetingName, String status){
         MultiValueMap<String,String> params = new LinkedMultiValueMap<>();

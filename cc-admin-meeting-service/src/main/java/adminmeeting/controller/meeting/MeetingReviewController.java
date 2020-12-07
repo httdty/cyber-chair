@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiOperation;
 public class MeetingReviewController {
     Logger logger = LoggerFactory.getLogger(MeetingArticleController.class);
 
+    @Autowired
     private Service service;
 
     @Autowired

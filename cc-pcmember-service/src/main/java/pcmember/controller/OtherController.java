@@ -3,10 +3,7 @@ package pcmember.controller;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pcmember.repository.RebuttalRepository;
 import pcmember.repository.ReviewRelationRepository;
 import pcmember.utility.Rebuttal;
@@ -38,7 +35,7 @@ public class OtherController {
     }
     @ApiOperation(value = "将rebuttal对象存入rebuttal表", response = Rebuttal.class, responseContainer = "List")
     @PostMapping("/rebuttal/save")
-    public ResponseEntity<?> rebuttalSave(Rebuttal rebuttal){
+    public ResponseEntity<?> rebuttalSave(@RequestBody Rebuttal rebuttal){
         return ResponseEntity.ok(rebuttalRepository.save(rebuttal));
     }
 
@@ -60,7 +57,7 @@ public class OtherController {
     @ApiOperation(value = "根据ReviewerId和ArticleId查reviewRelation表", response = ReviewRelation.class)
     @GetMapping("/reviewRelation/findByReviewerIdAndArticleId")
     public ResponseEntity<ReviewRelation> reviewFindByReviewerIdAndArticleId(long reviewerId, long articleId){
-        return ResponseEntity.ok(reviewRelationRepository.findByReviewerIdAndArticleId(reviewerId,articleId));
+        return ResponseEntity.ok(reviewRelationRepository.findByReviewerIdAndArticleId(reviewerId,articleId).get(0));
     }
     @ApiOperation(value = "根据Id查reviewRelation表中不是这个Id的对象", response = ReviewRelation.class,responseContainer = "List")
     @GetMapping("/reviewRelation/findByIdNot")
@@ -89,11 +86,7 @@ public class OtherController {
     }
     @ApiOperation(value = "将reviewRelation对象存入表中")
     @PostMapping("/reviewRelation/save")
-    public ResponseEntity<?> reviewSave(ReviewRelation reviewRelation){
+    public ResponseEntity<?> reviewSave(@RequestBody ReviewRelation reviewRelation){
         return ResponseEntity.ok(reviewRelationRepository.save(reviewRelation));
     } //可以不写@RequestParam
-//    @GetMapping("/test")
-//    public ResponseEntity<String> test(){
-//        return ResponseEntity.ok("ok");
-//    }
 }

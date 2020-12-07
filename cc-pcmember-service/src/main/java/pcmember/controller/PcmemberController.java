@@ -83,6 +83,7 @@ public class PcmemberController {
         else return ResponseEntity.badRequest().build();
     }
     @ApiOperation(value = "获取拒稿信息", response = ResponseEntity.class)
+    @GetMapping("/meeting/rebuttalInfo")
     public ResponseEntity<?> getRebuttalInfo(String articleId,@RequestHeader("authorization") String token) {
         if(restRPC.cheackAuth(token))
             return ResponseEntity.ok(reviewService.getRebuttalInfo(articleId));

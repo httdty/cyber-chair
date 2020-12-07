@@ -52,8 +52,8 @@ public class ReviewService {
     }
     private ReviewRelation securityCheckForReview(String pcMemberName, String articleId) {
         User reviewer =restRPC.userFindByUsername(pcMemberName);
-        ReviewRelation reviewRelation = reviewRelationRepository.findByReviewerIdAndArticleId(reviewer.getId(), Long.valueOf(articleId));
-        return reviewRelation;
+        List<ReviewRelation> reviewRelation = reviewRelationRepository.findByReviewerIdAndArticleId(reviewer.getId(), Long.valueOf(articleId));
+        return reviewRelation.get(0);
     }
     public ResponseWrapper<?> review(ReviewRequest request) {
         String meeting_name = restRPC.articleFindById((long) Long.valueOf(request.getArticleid())).getMeetingname();
@@ -292,7 +292,8 @@ public class ReviewService {
     }
 
     public ResponseWrapper<?> updateReview(UpdateReviewRequest request) {
-        ReviewRelation reviewRelation = reviewRelationRepository.findByReviewerIdAndArticleId(restRPC.userFindByUsername(request.getPcMemberName()).getId(), Long.valueOf(request.getArticleId()));
+        List<ReviewRelation> reviewRelations = reviewRelationRepository.findByReviewerIdAndArticleId(restRPC.userFindByUsername(request.getPcMemberName()).getId(), Long.valueOf(request.getArticleId()));
+        ReviewRelation reviewRelation=reviewRelations.get(0);
         Meeting meeting = restRPC.meetingFindById((long) reviewRelation.getMeetingId());
         String meetingStatus = meeting.getStatus();
         String updateStatus = request.getStatus();
@@ -326,7 +327,8 @@ public class ReviewService {
     }
 
     public ResponseWrapper<?> reviewConfirm(ReviewConfirmRequest request) {
-        ReviewRelation reviewRelation = reviewRelationRepository.findByReviewerIdAndArticleId(restRPC.userFindByUsername(request.getPcMemberName()).getId(), Long.valueOf(request.getArticleId()));
+        List<ReviewRelation> reviewRelations = reviewRelationRepository.findByReviewerIdAndArticleId(restRPC.userFindByUsername(request.getPcMemberName()).getId(), Long.valueOf(request.getArticleId()));
+        ReviewRelation reviewRelation = reviewRelations.get(0);
         Meeting meeting = restRPC.meetingFindById((long) reviewRelation.getMeetingId());
         String meetingStatus = meeting.getStatus();
         String confirmStatus = request.getStatus();

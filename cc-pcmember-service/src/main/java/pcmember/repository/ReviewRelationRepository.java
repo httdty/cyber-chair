@@ -15,7 +15,7 @@ public interface ReviewRelationRepository extends CrudRepository<ReviewRelation,
 
     List<ReviewRelation> findByReviewerIdAndMeetingId(Long reviewerId, Long meetingId);
 
-    ReviewRelation findByReviewerIdAndArticleId(Long reviewerId, Long articleId);
+    List<ReviewRelation> findByReviewerIdAndArticleId(Long reviewerId, Long articleId);
 
     List<ReviewRelation> findByIdNot(long id);
 
