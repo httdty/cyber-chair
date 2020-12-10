@@ -1,9 +1,10 @@
 module.exports = {
   devServer: {
       port: 1888,
+      // TODO: which ip address should be used？
       proxy: {
           '/api': {
-              target: 'http://192.168.31.214:9999',
+              target: 'http://cc-gateway-service:9999',
               changeOrigin: true,
               ws: true,
               pathRewrite: {
@@ -14,6 +15,7 @@ module.exports = {
       },
       disableHostCheck: true,
   },
+
   transpileDependencies: ['vuetify'],
 
   pluginOptions: {
