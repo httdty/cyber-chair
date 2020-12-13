@@ -1,0 +1,401 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cc-ui-service
+  namespace: ase-ns-03
+  labels:
+    app: cc-ui-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cc-ui-service
+  template:
+    metadata:
+      labels:
+        app: cc-ui-service
+    spec:
+      containers:
+        - name: cc-ui-service
+          image:  httdty2/cc-ui-service
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+            limits:
+              cpu: 500m
+              memory: 500Mi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cc-user-auth-service
+  namespace: ase-ns-03
+spec:
+  selector:
+    matchLabels:
+      app: cc-user-auth-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cc-user-auth-service
+    spec:
+      containers:
+      - name: cc-user-auth-service
+        image: httdty2/cc-user-auth-service
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            cpu: 200m
+            memory: 500Mi
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          timeoutSeconds: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cc-author-article-service
+  namespace: ase-ns-03
+spec:
+  selector:
+    matchLabels:
+      app: cc-author-article-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cc-author-article-service
+    spec:
+      containers:
+      - name: cc-author-article-service
+        image: httdty2/cc-author-article-service
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8081
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            cpu: 200m
+            memory: 500Mi
+        readinessProbe:
+          tcpSocket:
+            port: 8081
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          timeoutSeconds: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cc-admin-meeting-service
+  namespace: ase-ns-03
+spec:
+  selector:
+    matchLabels:
+      app: cc-admin-meeting-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cc-admin-meeting-service
+    spec:
+      containers:
+      - name: cc-admin-meeting-service
+        image: httdty2/cc-admin-meeting-service
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8082
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            cpu: 200m
+            memory: 500Mi
+        readinessProbe:
+          tcpSocket:
+            port: 8082
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          timeoutSeconds: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cc-pcmember-service
+  namespace: ase-ns-03
+spec:
+  selector:
+    matchLabels:
+      app: cc-pcmember-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cc-pcmember-service
+    spec:
+      containers:
+      - name: cc-pcmember-service
+        image: httdty2/cc-pcmember-service
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8083
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            cpu: 200m
+            memory: 500Mi
+        readinessProbe:
+          tcpSocket:
+            port: 8083
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          timeoutSeconds: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cc-chair-service
+  namespace: ase-ns-03
+spec:
+  selector:
+    matchLabels:
+      app: cc-chair-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cc-chair-service
+    spec:
+      containers:
+      - name: cc-chair-service
+        image: httdty2/cc-chair-service
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8084
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            cpu: 200m
+            memory: 500Mi
+        readinessProbe:
+          tcpSocket:
+            port: 8084
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          timeoutSeconds: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cc-gateway-service
+  namespace: ase-ns-03
+spec:
+  selector:
+    matchLabels:
+      app: cc-gateway-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cc-gateway-service
+    spec:
+      containers:
+      - name: cc-gateway-service
+        image: httdty2/cc-gateway-service
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9999
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            cpu: 200m
+            memory: 500Mi
+        readinessProbe:
+          tcpSocket:
+            port: 9999
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          timeoutSeconds: 5
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cc-eureka-service
+  namespace: ase-ns-03
+spec:
+  selector:
+    matchLabels:
+      app: cc-eureka-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cc-eureka-service
+    spec:
+      containers:
+        - name: cc-eureka-service
+          image: httdty2/cc-eureka-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9091
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+            limits:
+              cpu: 200m
+              memory: 500Mi
+          readinessProbe:
+            tcpSocket:
+              port: 9091
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            timeoutSeconds: 5
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cc-ui-service
+  namespace: ase-ns-03
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+  selector:
+    app: cc-ui-service
+  type: LoadBalancer
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cc-user-auth-service
+  namespace: ase-ns-03
+spec:
+  ports:
+    - name: http
+      port: 8080
+  selector:
+   app: cc-user-auth-service
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cc-author-article-service
+  namespace: ase-ns-03
+spec:
+  ports:
+    - name: http
+      port: 8081
+  selector:
+   app: cc-author-article-service
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cc-admin-meeting-service
+  namespace: ase-ns-03
+spec:
+  ports:
+    - name: http
+      port: 8082
+  selector:
+   app: cc-admin-meeting-service
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cc-pcmember-service
+  namespace: ase-ns-03
+spec:
+  ports:
+    - name: http
+      port: 8083
+  selector:
+   app: cc-pcmember-service
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cc-chair-service
+  namespace: ase-ns-03
+spec:
+  ports:
+    - name: http
+      port: 8084
+  selector:
+   app: cc-chair-service
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cc-gateway-service
+  namespace: ase-ns-03
+spec:
+  ports:
+    - name: http
+      port: 9999
+  selector:
+   app: cc-gateway-service
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cc-eureka-service
+  namespace: ase-ns-03
+spec:
+  ports:
+    - name: http
+      port: 9091
+  selector:
+    app: cc-eureka-service
+  type: LoadBalancer
+
