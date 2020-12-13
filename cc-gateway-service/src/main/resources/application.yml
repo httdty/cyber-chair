@@ -28,6 +28,7 @@ spring:
   application:
     name: cc-gateway-service
 
+
 eureka:
   client:
     registry-fetch-interval-seconds: 3

@@ -7,7 +7,7 @@ metadata:
   labels:
     app: cc-ui-service
 spec:
-  replicas: 1
+  
   selector:
     matchLabels:
       app: cc-ui-service
@@ -39,7 +39,7 @@ spec:
   selector:
     matchLabels:
       app: cc-user-auth-service
-  replicas: 1
+  
   template:
     metadata:
       labels:
@@ -76,7 +76,7 @@ spec:
   selector:
     matchLabels:
       app: cc-author-article-service
-  replicas: 1
+  
   template:
     metadata:
       labels:
@@ -113,7 +113,7 @@ spec:
   selector:
     matchLabels:
       app: cc-admin-meeting-service
-  replicas: 1
+  
   template:
     metadata:
       labels:
@@ -150,7 +150,7 @@ spec:
   selector:
     matchLabels:
       app: cc-pcmember-service
-  replicas: 1
+  
   template:
     metadata:
       labels:
@@ -187,7 +187,7 @@ spec:
   selector:
     matchLabels:
       app: cc-chair-service
-  replicas: 1
+  
   template:
     metadata:
       labels:
@@ -224,7 +224,7 @@ spec:
   selector:
     matchLabels:
       app: cc-gateway-service
-  replicas: 1
+  
   template:
     metadata:
       labels:
@@ -260,7 +260,7 @@ spec:
   selector:
     matchLabels:
       app: cc-eureka-service
-  replicas: 1
+  
   template:
     metadata:
       labels:
@@ -311,7 +311,7 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 8080
+      port: 8085
   selector:
    app: cc-user-auth-service
 
