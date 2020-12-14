@@ -97,6 +97,4 @@ java -jar cc-user-auth-service-1.0.jar
         ![image.png](https://i.loli.net/2020/12/13/tbDkVFx2TWoGyU5.png)
     - 调用`kubectl get pod -n ase-ns-03`看到如下结果
         ![image.png](https://i.loli.net/2020/12/13/AUixaLbhdNRnq8z.png)
-    
-
-
+      
