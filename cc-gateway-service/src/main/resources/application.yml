@@ -26,9 +26,9 @@ spring:
           predicates: # Path 配置对应的url，比如配置了/welcome, 那么请求localhost:9999/welcome -> cc-pcmember-service/welcome
             - Path=/meeting/reviewArticles,/meeting/reviewArticle,/meeting/reviewer,/user/reviews,/meeting/alreadyReviewedInfo,/meeting/beginReview,/meeting/updateReview,/meeting/reviewConfirm,/meeting/rebuttal,/meeting/rebuttalInfo
         - id: route-for-cc-notice-service
-            uri: lb://cc-notice-service
-            predicates:
-              - Path=/notice,/notice/unread
+          uri: lb://cc-notice-service
+          predicates:
+            - Path=/notice,/notice/unread
 
   application:
     name: cc-gateway-service
