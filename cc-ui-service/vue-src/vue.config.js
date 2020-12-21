@@ -4,7 +4,7 @@ module.exports = {
       // TODO: which ip address should be used？
       proxy: {
           '/api': {
-              target: 'http://cc-gateway-service:9999',
+              target: 'http://localhost:9999',
               changeOrigin: true,
               ws: true,
               pathRewrite: {
