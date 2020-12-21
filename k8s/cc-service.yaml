@@ -286,6 +286,41 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 5
 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cc-notice-service
+  namespace: ase-ns-03
+spec:
+  selector:
+    matchLabels:
+      app: cc-notice-service
+
+  template:
+    metadata:
+      labels:
+        app: cc-notice-service
+    spec:
+      containers:
+        - name: cc-notice-service
+          image: httdty2/cc-notice-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8086
+          resources:
+            requests:
+              cpu: 400m
+              memory: 400Mi
+            limits:
+              cpu: 400m
+              memory: 800Mi
+          readinessProbe:
+            tcpSocket:
+              port: 9091
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            timeoutSeconds: 5
 
 ---
 apiVersion: v1
@@ -399,3 +434,15 @@ spec:
     app: cc-eureka-service
   type: LoadBalancer
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cc-notice-service
+  namespace: ase-ns-03
+spec:
+  ports:
+    - name: http
+      port: 8086
+  selector:
+    app: cc-notice-service

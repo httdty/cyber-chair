@@ -23,6 +23,7 @@
         <module>cc-admin-meeting-service</module>
         <module>cc-eureka-service</module>
         <module>cc-gateway-service</module>
+        <module>cc-notice-service</module>
     </modules>
 
     <parent>
@@ -31,15 +32,6 @@
         <version>2.2.5.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
-<!--    TODO: need to insert modules here-->
-<!--    <modules>-->
-<!--        <module>ts-verification-code-service</module>-->
-<!--        <module>ts-contacts-service</module>-->
-<!--        <module>ts-order-service</module>-->
-<!--        &lt;!&ndash;<module>ts-ticket-advance-service</module>&ndash;&gt;-->
-<!--        &lt;!&ndash;<module>1_services_analysis_mvn</module>&ndash;&gt;-->
-<!--    </modules>-->
 
     <dependencies>
         <dependency>
@@ -102,12 +94,6 @@
             <scope>test</scope>
         </dependency>
 
-<!--        TODO: change it to mysql-->
-        <!--        <dependency>-->
-        <!--            <groupId>mysql</groupId>-->
-        <!--            <artifactId>mysql-connector-java</artifactId>-->
-        <!--        </dependency>-->
-
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -119,12 +105,6 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.9.2</version>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>org.openjfx</groupId>-->
-<!--            <artifactId>javafx-controls</artifactId>-->
-<!--            <version>14</version>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>

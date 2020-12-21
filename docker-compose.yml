@@ -80,6 +80,16 @@ services:
     networks:
       - my-network
 
+  cc-notice-service:
+    build: cc-user-auth-service
+    image: httdty2/cc-notice-service
+    container_name: cc-notice-service
+    restart: always
+    ports:
+      - 8086:8086
+    networks:
+      - my-network
+
 networks:
   my-network:
 #     driver: overlay
