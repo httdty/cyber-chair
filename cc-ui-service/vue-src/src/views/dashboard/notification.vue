@@ -75,14 +75,14 @@
               <v-col
                 v-for="(item, i) in items_done"
                 :key="i"
-                cols="6"
+                cols="12"
               >
                 <v-card
                   color="grey lighten-1"
                   dark
                 >
                   <v-row class="d-flex align-center justify-space-around">
-                    <v-col cols="6">
+                    <v-col cols="12">
                       <v-card-title
                         class="subtitle"
                         v-text="item.meetingName"
@@ -90,7 +90,7 @@
 
                       <v-card-subtitle v-text="'Chair: '+item.chairName" class="my-0"></v-card-subtitle>
                     </v-col>
-                    <v-col cols="5">
+                    <v-col cols="6">
                       <v-btn text disabled v-if="item.choice=='accepted'">ACCEPTED</v-btn>
                       <v-btn text disabled v-if="item.choice=='rejected'">REJECTED</v-btn>
                     </v-col>
@@ -143,7 +143,7 @@
         </base-material-card>
       </v-col>
 <!--      some blank gap here-->
-      <v-col cols="12" md="2"></v-col>
+      <v-col cols="12" md="1"></v-col>
 
 <!--      new message block-->
       <v-col cols="12" md="4">
@@ -190,7 +190,7 @@
 
 
               </v-col>
-              <div v-if="items.length==0">No data available</div>
+              <div v-if="messages.length==0">No data available</div>
             </v-container>
           </v-app>
 
@@ -213,14 +213,14 @@
               <v-col
                 v-for="(item, i) in messages_done"
                 :key="i"
-                cols="6"
+                cols="12"
               >
                 <v-card
-                  color="rgb(132,177,248)"
+                  color="grey lighten-1"
                   dark
                 >
                   <v-row class="d-flex align-center justify-space-around">
-                    <v-col cols="6">
+                    <v-col cols="12">
                       <v-card-title
                         class="subtitle"
                         v-text="item.content"
@@ -231,7 +231,7 @@
                   </v-row>
                 </v-card>
               </v-col>
-              <div v-if="items_done.length==0">No data available</div>
+              <div v-if="messages_done.length==0">No data available</div>
             </v-container>
           </v-app>
 
@@ -283,7 +283,6 @@ export default {
       this.dialog = true;
     },
     read(item) {
-      this.situation = 'read';
       this.messageId = item.messageId;
     },
     sendfeedback() {
@@ -306,12 +305,9 @@ export default {
       });
     },
     markAsRead() {
-      if (this.situation == 'read' && this.selectedTopic.length == 0) {
-        return false;
-      }
+      console.log("mark as read in")
       this.$axios.put('api/notice',
         {
-          username: localStorage.username,
           id: this.messageId
         }
       ).then(resp => {

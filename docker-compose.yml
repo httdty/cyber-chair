@@ -81,7 +81,7 @@ services:
       - my-network
 
   cc-notice-service:
-    build: cc-user-auth-service
+    build: cc-notice-service
     image: httdty2/cc-notice-service
     container_name: cc-notice-service
     restart: always
@@ -92,5 +92,4 @@ services:
 
 networks:
   my-network:
-#     driver: overlay
     driver: bridge

@@ -317,7 +317,7 @@ spec:
               memory: 800Mi
           readinessProbe:
             tcpSocket:
-              port: 9091
+              port: 8086
             initialDelaySeconds: 120
             periodSeconds: 10
             timeoutSeconds: 5

@@ -227,7 +227,7 @@
         var formData = new FormData();
 
         formData.append("meetingName", essayForm.meetingName)
-        formData.append("username", essayForm.username)
+        formData.append("username", localStorage.username)
         formData.append('essayTitle', essayForm.essayTitle)
         formData.append('essayAbstract', essayForm.essayAbstract)
         formData.append('submitTime', essayForm.submitTime)

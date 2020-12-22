@@ -148,7 +148,7 @@ export default {
 
         loadArticles: function() {
             this.meetingName = this.$route.query.meetingName;
-            this.authorName = this.$route.query.authorName;
+            this.authorName = localStorage.username;
             let meetingName = this.meetingName;
             let authorName = this.authorName;
 

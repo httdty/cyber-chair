@@ -76,7 +76,6 @@ public class UserMeetingService {
                 new ParameterizedTypeReference<List<PCMemberRelation>>() {
                 });
 
-
         List<PCMemberRelation> relationList = Objects.requireNonNull(result.getBody());
 
         HashMap<String, Set<HashMap<String, Object>>> body = new HashMap<>();

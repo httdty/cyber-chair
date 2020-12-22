@@ -210,6 +210,22 @@
             // alert("error occurred when loading notification data");
             console.log(error);
         });
+
+      this.$axios.get('api/notice/unread',
+        {params:{receiver: localStorage.username}}
+      ).then(resp => {
+        if(resp.data.responseCode == 200 && resp.data.responseMessage == "success"){
+          var len = resp.data.responseBody;
+          for(var i=0;i<len;i++){
+            that.notifications.push("You have one unread message");
+          }
+        }else{
+          // alert("errors occurred when getting notification information");
+        }
+      }).catch(error => {
+        // alert("error occurred when loading notification data");
+        console.log(error);
+      });
     },
   }
 </script>

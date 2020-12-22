@@ -39,7 +39,7 @@
                       </v-col>
                       <v-col cols="3" class="px-0">
                         <template v-if="$vuetify.breakpoint.mdAndUp">
-                          
+
                           <v-select
                             v-model="sortBy"
                             flat
@@ -53,7 +53,7 @@
                           <v-btn-toggle v-model="sortDesc" mandatory></v-btn-toggle>
                         </template>
                       </v-col>
-                  
+
                     </v-row>
                   </template>
 
@@ -100,7 +100,7 @@
 
                   <template v-slot:footer>
                     <v-row class="mt-2" align="center" justify="center">
-                      
+
 
                       <v-spacer></v-spacer>
 
@@ -270,7 +270,7 @@
             var meetingName = this.$route.query.meetingName;
             this.$axios.get('api/meeting/invitationStatus',
                 {params:{meetingName: meetingName}}
-            ).then(resp => {            
+            ).then(resp => {
                 if(resp.data.responseCode == 200 && resp.data.responseMessage == "success"){
                     var users = resp.data.responseBody.invitationStatus;
                     for(var i=0;i<users.length;i++){
@@ -281,6 +281,26 @@
                             status:this.token2status[users[i]["status"]]
                         });
                     }
+                  this.$axios.get('api/util/users',
+                    {params:{fullname:''}}
+                  ).then(resp => {
+                    if(resp.data.responseCode == 200 && resp.data.responseMessage == "success"){
+                      var users = resp.data.responseBody.users;
+                      for(var i=0;i<users.length;i++){
+                        if(users[i]["username"]=="admin")continue;
+                        if(that.app_ids.indexOf(users[i]["username"]) >= 0) continue;
+                        if(users[i]["username"]==localStorage.username)continue;
+                        that.items.push({username:users[i]["username"],fullname:users[i]["fullname"],
+                          institution:users[i]["institution"],email:users[i]["email"]});
+                      }
+                    }else{
+                      this.tips_text = "errors occurred when getting users information";
+                      this.$toast(this.tips_text,{color:'red'})
+                    }
+                  }).catch(error => {
+                    this.tips_text = "error occurred when loading user data";
+                    this.$toast(this.tips_text,{color:'red'})
+                  });
                 }else{
                     this.tips_text = "errors occurred when getting users information";
                     this.$toast(this.tips_text,{color:'red'})
@@ -289,27 +309,8 @@
                 this.tips_text = "error occurred when loading user data";
                 this.$toast(this.tips_text,{color:'red'})
             });
-            // console.log(that.app_ids)
-            this.$axios.get('api/util/users',
-                {params:{fullname:''}}
-            ).then(resp => {            
-                if(resp.data.responseCode == 200 && resp.data.responseMessage == "success"){
-                    var users = resp.data.responseBody.users;
-                    for(var i=0;i<users.length;i++){
-                        if(users[i]["username"]=="admin")continue;
-                        if(that.app_ids.includes(users[i]["username"]))continue;
-                        if(users[i]["username"]==localStorage.username)continue;
-                        that.items.push({username:users[i]["username"],fullname:users[i]["fullname"],
-                        institution:users[i]["institution"],email:users[i]["email"]});
-                    }
-                }else{
-                    this.tips_text = "errors occurred when getting users information";
-                    this.$toast(this.tips_text,{color:'red'})
-                }
-            }).catch(error => {
-                this.tips_text = "error occurred when loading user data";
-                this.$toast(this.tips_text,{color:'red'})
-          });
+
+
         }
     }
 

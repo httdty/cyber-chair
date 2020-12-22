@@ -19,6 +19,8 @@ import authorarticle.utility.response.ResponseGenerator;
 import authorarticle.utility.response.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -167,6 +169,13 @@ public class AuthorService {
                 request.getAuthors()
         );
         articleRepository.save(newArticle);
+
+        String receiver = meetingResponse.getChairName();
+        String content = request.getUsername() + ": submitted an article";
+        Notice notice = new Notice(receiver, content);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        HttpEntity<Notice> entity = new HttpEntity<>(notice,httpHeaders);
+        restTemplate.postForObject(api.getSaveNotice(),entity,String.class);
 
         return new ResponseWrapper<>(200, ResponseGenerator.success, new HashMap<>());
     }

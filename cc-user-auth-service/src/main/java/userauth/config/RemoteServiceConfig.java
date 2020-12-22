@@ -22,6 +22,15 @@ public class RemoteServiceConfig {
     private String findMeetingByChairName;
     private String findArticleByContributorName;
     private String findMeetingByStatusAndChairNameNot;
+    private String saveNotice;
+
+    public String getSaveNotice() {
+        return saveNotice;
+    }
+
+    public void setSaveNotice(String saveNotice) {
+        this.saveNotice = saveNotice;
+    }
 
     public String getCheck() {
         return check;

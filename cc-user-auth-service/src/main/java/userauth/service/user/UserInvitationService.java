@@ -2,6 +2,7 @@ package userauth.service.user;
 
 import userauth.config.RemoteServiceConfig;
 import userauth.domain.Meeting;
+import userauth.domain.Notice;
 import userauth.domain.PCMemberRelation;
 import userauth.repository.*;
 import userauth.request.user.InvitationRepoRequest;
@@ -121,6 +122,15 @@ public class UserInvitationService {
                 break;
             }
         }
+        // TODO: 在此处post一条message，chairname在Meeting中有，可以调用
+        String receiver = Objects.requireNonNull(resp.getBody()).getChairName();
+        String content = request.getUsername() + ": " + request.getResponse() + " your invitation";
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        Notice notice = new Notice(receiver, content);
+        HttpEntity<Notice> entity = new HttpEntity<>(notice,httpHeaders);
+        restTemplate.postForObject(api.getSaveNotice(),entity,String.class);
+
         return new ResponseWrapper<>(200, ResponseGenerator.success, null);
     }
 

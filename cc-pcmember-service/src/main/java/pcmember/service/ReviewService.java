@@ -122,6 +122,16 @@ public class ReviewService {
         //变更会议状态
         meeting.setStatus(MeetingStatus.reviewing);
         restRPC.meetingSave(meeting);
+
+        // TODO: 加入消息通知
+        for (PCMemberRelation x: pcMemberRelations) {
+            User user = restRPC.userFindById(x.getPcmemberId());
+            String receiver = user.getUsername();
+            String content = meetingName + ": start reviewing";
+            Notice notice = new Notice(receiver, content);
+            restRPC.noticeSave(notice);
+        }
+
         return new ResponseWrapper<>(200, ResponseGenerator.success, null);
     }
     private void ArticleAssignInTopicRelevant(List<Article> articles, List<PCMemberRelation> pcMemberRelations, long meetingId) {

@@ -21,13 +21,13 @@ public class NoticeController {
 
 
     @ApiOperation("新增消息")
-    @PostMapping
+    @PostMapping(headers = "Accept=application/json")
     public ResponseEntity<?> newMessage(@RequestBody NewMessageReq req) {
         return ResponseEntity.ok(noticeService.newNotice(req.getReceiver(), req.getContent()));
     }
 
     @ApiOperation("mark as read")
-    @PutMapping
+    @PutMapping(headers = "Accept=application/json")
     public ResponseEntity<?> readMessage(@RequestBody ReadMessagReq req) {
         return ResponseEntity.ok(noticeService.readNotice(req.getId()));
     }

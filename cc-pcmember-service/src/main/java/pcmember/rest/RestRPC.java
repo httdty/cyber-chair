@@ -44,6 +44,7 @@ public class RestRPC {
     private String article_findIdNot="http://cc-author-article-service/article/findArticleByIdNot";
     private String article_save="http://cc-author-article-service/article/save";
     private String article_findNameAdSt="http://cc-author-article-service/article/findArticleByMeetingNameAndStatus";
+    private String save_notice="http://cc-notice-service/notice";
 //    TODO: 下面的地址不知道对不对
     private String pcmember_findIdAdSt="http://cc-admin-meeting-service/meeting/pcMemberRelation/getByMeetingIdAndStatus";
     private String check_auth="http://cc-user-auth-service/check";
@@ -94,6 +95,11 @@ public class RestRPC {
         String answer = restTemplate.postForObject(meet_save, entity, String.class);
     }
 
+    //=====================notice=====================
+    public void noticeSave(Notice notice){
+        HttpEntity<Notice> entity = new HttpEntity<>(notice,headers);
+        restTemplate.postForObject(save_notice, entity, String.class);
+    }
     //=====================article=====================
     public Article articleFindById(long id){
         MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
